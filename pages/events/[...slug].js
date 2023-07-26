@@ -4,7 +4,6 @@ import EventList from "@/components/events/EventList/EventList";
 import ResultsTitle from "@/components/events/ResultsTitle/ResultsTitle";
 import Button from "@/components/ui/Button/Button";
 import ErrorAlert from "@/components/ui/ErrorAlert/ErrorAlert";
-import {getFilteredEvents} from "@/helpers/api-util";
 import useSWR from "swr";
 
 const FilteredEventsPage = () => {

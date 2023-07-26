@@ -5,10 +5,11 @@ import ResultsTitle from "@/components/events/ResultsTitle/ResultsTitle";
 import Button from "@/components/ui/Button/Button";
 import ErrorAlert from "@/components/ui/ErrorAlert/ErrorAlert";
 import useSWR from "swr";
+import Head from "next/head";
 
 const FilteredEventsPage = () => {
   const router = useRouter();
-  const [ loadedEvents, setLoadedEvents ] = useState();
+  const [loadedEvents, setLoadedEvents] = useState();
   const filteredData = router.query.slug;
 
   const fetcher = (url) => fetch(url).then(res => res.json())
@@ -32,13 +33,25 @@ const FilteredEventsPage = () => {
     }
   }, [data]);
 
+  let pageHeadData = <Head>
+    <title>Filtered Events</title>
+    <meta name="description" content="A list of filtered events."/>
+  </Head>;
 
   if (!loadedEvents) {
-    return <p className='center'>Loading...</p>
+    return <>
+      {pageHeadData}
+      <p className='center'>Loading...</p>
+    </>
   }
 
   const filteredYear = +filteredData[0];
   const filteredMonth = +filteredData[1];
+
+  pageHeadData = <Head>
+    <title>Filtered Events</title>
+    <meta name="description" content={`All events for ${filteredMonth}/${filteredYear}`}/>
+  </Head>
 
   if (
     isNaN(filteredYear) ||
@@ -51,6 +64,8 @@ const FilteredEventsPage = () => {
   ) {
     return (
       <>
+        {pageHeadData}
+
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values</p>
         </ErrorAlert>
@@ -80,6 +95,8 @@ const FilteredEventsPage = () => {
   ) {
     return (
       <>
+        {pageHeadData}
+
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values</p>
         </ErrorAlert>
@@ -94,6 +111,8 @@ const FilteredEventsPage = () => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
+
         <ErrorAlert>
           <p>No events found for chosen filter!</p>
         </ErrorAlert>
@@ -109,7 +128,10 @@ const FilteredEventsPage = () => {
 
   return (
     <>
+      {pageHeadData}
+
       <ResultsTitle date={date}/>
+
       <EventList events={filteredEvents}/>
     </>
   );

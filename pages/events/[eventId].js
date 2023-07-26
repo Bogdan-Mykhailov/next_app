@@ -2,8 +2,8 @@ import React from 'react';
 import EventSummary from "@/components/eventDetail/EventSummary/EventSummary";
 import EventLogistics from "@/components/eventDetail/EventLogistics/EventLogistics";
 import EventContent from "@/components/eventDetail/EventContent/EventContent";
-import ErrorAlert from "@/components/ui/ErrorAlert/ErrorAlert";
 import { getEventById, getFeaturedEvents } from "@/helpers/api-util";
+import Head from "next/head";
 
 const EventDetailPage = (props) => {
   const {currentEvent} = props;
@@ -26,6 +26,11 @@ const EventDetailPage = (props) => {
 
   return (
     <>
+      <Head>
+        <title>{ title }</title>
+        <meta name="description" content={description}/>
+      </Head>
+
       <EventSummary title={title}/>
 
       <EventLogistics

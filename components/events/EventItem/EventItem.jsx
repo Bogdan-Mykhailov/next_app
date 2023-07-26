@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button/Button";
 import DateIcon from "@/components/icons/DateIcon";
 import AddressIcon from "@/components/icons/AddressIcon";
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import Image from 'next/image'
 
 const EventItem = ({event}) => {
   const {
@@ -25,7 +26,7 @@ const EventItem = ({event}) => {
 
   return (
     <li className={s.item}>
-      <img src={'/' + image} alt={title}/>
+      <Image src={'/' + image} alt={title} width={250} height={160}/>
 
       <div className={s.content}>
         <div>

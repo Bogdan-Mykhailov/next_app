@@ -1,5 +1,5 @@
-import { COLLECTIONS } from "@/constants";
-import { connectDatabase, getAllDocuments, insertDocument } from "@/helpers/db-util";
+import {COLLECTIONS} from "@/constants";
+import {connectDatabase, getAllDocuments, insertDocument} from "@/helpers/db-util";
 
 async function handler(req, res) {
   const eventId = req.query.eventId;
@@ -48,7 +48,11 @@ async function handler(req, res) {
   if (req.method === 'GET') {
 
     try {
-      const documents = await getAllDocuments(client, COLLECTIONS.COMMENTS, {_id: -1})
+      const documents = await getAllDocuments(
+        client,
+        COLLECTIONS.COMMENTS,
+        {_id: -1},
+        {eventId})
       res.status(200).json({comments: documents});
     } catch (err) {
       res.status(500).json({message: 'Getting comments failed.'});

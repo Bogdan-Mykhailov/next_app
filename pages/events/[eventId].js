@@ -4,6 +4,7 @@ import EventLogistics from "@/components/eventDetail/EventLogistics/EventLogisti
 import EventContent from "@/components/eventDetail/EventContent/EventContent";
 import { getEventById, getFeaturedEvents } from "@/helpers/api-util";
 import Head from "next/head";
+import Comments from "@/components/input/Comments/Comments";
 
 const EventDetailPage = (props) => {
   const {currentEvent} = props;
@@ -17,6 +18,7 @@ const EventDetailPage = (props) => {
   }
 
   const {
+    id,
     description,
     title,
     date,
@@ -42,6 +44,7 @@ const EventDetailPage = (props) => {
 
       <EventContent>
         <p>{description}</p>
+        <Comments eventId={id} />
       </EventContent>
     </>
   );
@@ -52,7 +55,7 @@ export const getStaticProps = async (context) => {
   const currentEvent = await getEventById(eventId)
 
   return {
-    props: {currentEvent},
+    props: { currentEvent },
     revalidate: 30
   }
 }

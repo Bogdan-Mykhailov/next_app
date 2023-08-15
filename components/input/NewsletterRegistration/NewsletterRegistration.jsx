@@ -1,6 +1,5 @@
 import s from './NewsletterRegistration.module.css';
 import {useRef} from "react";
-import {log} from "next/dist/server/typescript/utils";
 
 function NewsletterRegistration() {
   const emailInputRef = useRef();
@@ -19,11 +18,6 @@ function NewsletterRegistration() {
     })
       .then((response) => response.json())
       .then((data) => console.log(data))
-
-
-    // fetch user input (state or refs)
-    // optional: validate input
-    // send valid data to API
   }
 
   return (

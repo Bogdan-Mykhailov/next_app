@@ -1,14 +1,7 @@
-import {MongoClient} from 'mongodb';
+import {COLLECTIONS} from "@/constants";
+import {connectDatabase, insertDocument} from "@/helpers/db-util";
 
-async function connectDatabase() {
-  return await MongoClient.connect('mongodb+srv://bogdan_mykhailov:TfZnqFASlkvaEyTZ@cluster0.nsvvfdc.mongodb.net/?retryWrites=true&w=majority');
-}
 
-async function insertDocument(client, document) {
-  const db = client.db('majestic');
-
-  await db.collection('emails').insertOne(document);
-}
 
 async function handler(req, res) {
   if (req.method === 'POST') {
@@ -30,8 +23,7 @@ async function handler(req, res) {
     }
 
     try {
-      await insertDocument(client, {email: userEmail})
-      await client.close();
+      await insertDocument(client, COLLECTIONS.EMAILS, {email: userEmail})
     } catch (err) {
       res.status(500).json({ message: 'Inserting data failed.' });
       return;

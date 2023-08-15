@@ -6,7 +6,6 @@ import {NotificationContextProvider} from "@/store/notification-context";
 
 const App = ({Component, pageProps}) => {
 
-
   return (
     <>
       <NotificationContextProvider>
@@ -17,7 +16,6 @@ const App = ({Component, pageProps}) => {
             <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
           </Head>
           <Component {...pageProps} />
-          <Notification title="Test" message="this is a test" status="pending" />
         </Layout>
       </NotificationContextProvider>
     </>

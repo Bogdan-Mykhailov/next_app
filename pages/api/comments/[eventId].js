@@ -28,7 +28,7 @@ async function handler(req, res) {
 
     const db = client.db('majestic');
 
-    const result = await db.collection('comments').insertOne({ newComment });
+    const result = await db.collection('comments').insertOne(newComment);
 
     newComment.id = result.insertedId;
 
@@ -36,12 +36,15 @@ async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    const dummyList = [
-      {id: 'c1', name: 'Bogdan Mykhailov', text: 'A first comment.'},
-      {id: 'c2', name: 'Maryna Mykhailova', text: 'A second comment.'}
-    ];
+    const db = client.db('majestic');
 
-    res.status(201).json({ comments: dummyList })
+    const documents = await db
+      .collection('comments')
+      .find()
+      .sort({ _id: -1 })
+      .toArray();
+
+    res.status(200).json({ comments: documents })
   }
 
   await client.close();

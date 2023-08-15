@@ -10,7 +10,7 @@ async function handler(req, res) {
       return;
     }
 
-    const client = await MongoClient.connect('mongodb+srv://bogdan_mykhailov:TfZnqFASlkvaEyTZ@cluster0.nsvvfdc.mongodb.net/?retryWrites=true&w=majority')
+    const client = await MongoClient.connect('mongodb+srv://bogdan_mykhailov:TfZnqFASlkvaEyTZ@cluster0.nsvvfdc.mongodb.net/?retryWrites=true&w=majority');
     const db = client.db('majestic');
 
     await db.collection('emails').insertOne({ email: userEmail });

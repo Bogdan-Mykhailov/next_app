@@ -16,7 +16,7 @@ function NewsletterRegistration() {
       title: 'Signing up...',
       message: 'Registering for newsletter.',
       status: 'pending'
-    })
+    });
 
     fetch('/api/newsletter', {
       method: 'POST',
